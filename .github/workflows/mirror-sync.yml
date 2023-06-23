@@ -1,0 +1,25 @@
+name: mirror-sync
+
+on:
+  schedule:
+    - cron:  '12 3 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  mirror-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - uses: gautamkrishnar/keepalive-workflow@v1
+
+    - name: dayzdockerserver
+      run: ./mirror.sh
+      env:
+        source_repo:  https://ceregatti.org/git/daniel/dayzdockerserver.git
+        github_repo: dayzdockerserver.git
+        branch: main
+        access_token: ${{ secrets.ACCESS_TOKEN }}
