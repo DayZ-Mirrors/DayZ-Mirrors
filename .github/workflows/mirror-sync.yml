@@ -19,7 +19,15 @@ jobs:
     - name: dayzdockerserver
       run: ./mirror.sh
       env:
-        source_repo:  https://ceregatti.org/git/daniel/dayzdockerserver.git
+        source_repo: https://ceregatti.org/git/daniel/dayzdockerserver.git
         github_repo: dayzdockerserver.git
         branch: main, release-server
+        access_token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: DayZ-CommunityFramework
+      run: ./mirror.sh
+      env:
+        source_repo: https://github.com/Arkensor/DayZ-CommunityFramework.git
+        github_repo: DayZ-CommunityFramework.git
+        branch: production, development
         access_token: ${{ secrets.ACCESS_TOKEN }}
