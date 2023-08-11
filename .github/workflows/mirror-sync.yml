@@ -22,7 +22,7 @@ jobs:
         source_repo: https://ceregatti.org/git/daniel/dayzdockerserver.git
         github_repo: dayzdockerserver.git
         branch: main, release-server
-        access_token: ${{ secrets.GITHUB_TOKEN }}
+        access_token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: DayZ-CommunityFramework
       run: ./mirror.sh
@@ -30,4 +30,4 @@ jobs:
         source_repo: https://github.com/Arkensor/DayZ-CommunityFramework.git
         github_repo: DayZ-CommunityFramework.git
         branch: production, development
-        access_token: ${{ secrets.GITHUB_TOKEN }}
+        access_token: ${{ secrets.ACCESS_TOKEN }}
