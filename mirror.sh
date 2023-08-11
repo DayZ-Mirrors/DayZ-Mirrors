@@ -27,7 +27,7 @@ done
 
 # clone (use first branch in cloning)
 rm gh_repo -rf
-git clone -b "${BRANCHES[0]}" "${GITHUB_REPO_URL}" gh_repo || exit 1
+git clone "${GITHUB_REPO_URL}" gh_repo || exit 1
 cd gh_repo
 
 # pull and push all branches
