@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # full github url
-GITHUB_REPO_URL="https://${access_token}@github.com/${GITHUB_REPOSITORY_OWNER}/${github_repo}"
+GITHUB_REPO_URL="https://x-access-token:${access_token}@github.com/${GITHUB_REPOSITORY_OWNER}/${github_repo}"
 
 # break down branch list
 ALL_BRANCHES=(${branch//,/ })
