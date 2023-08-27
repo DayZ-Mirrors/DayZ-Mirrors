@@ -31,3 +31,11 @@ jobs:
         github_repo: DayZ-CommunityFramework.git
         branch: production, development
         access_token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: Pripyat Mission Files
+      run: ./mirror.sh
+      env:
+        source_repo: https://github.com/FrenchiestFry15/PripyatMissionFiles.git
+        github_repo: PripyatMissionFiles.git
+        branch: main
+        access_token: ${{ secrets.ACCESS_TOKEN }}
