@@ -17,14 +17,16 @@ jobs:
     - uses: gautamkrishnar/keepalive-workflow@v1
 
     - name: dayzdockerserver
+      if: ${{ always() }}
       run: ./mirror.sh
       env:
         source_repo: https://ceregatti.org/git/daniel/dayzdockerserver.git
         github_repo: dayzdockerserver.git
-        branch: main, release-server
+        branch: main
         access_token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: DayZ-CommunityFramework
+      if: ${{ always() }}
       run: ./mirror.sh
       env:
         source_repo: https://github.com/Arkensor/DayZ-CommunityFramework.git
@@ -33,6 +35,7 @@ jobs:
         access_token: ${{ secrets.ACCESS_TOKEN }}
 
     - name: Pripyat Mission Files
+      if: ${{ always() }}
       run: ./mirror.sh
       env:
         source_repo: https://github.com/FrenchiestFry15/PripyatMissionFiles.git
