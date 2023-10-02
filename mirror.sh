@@ -6,6 +6,7 @@ GITHUB_REPO_URL="https://${access_token}@github.com/${GITHUB_REPOSITORY_OWNER}/$
 # break down branch list
 ALL_BRANCHES=(${branch//,/ })
 BRANCHES=()
+ERRORS=0
 
 # disable early exit during branch selection but keep pipefail to skip pipestatus
 set +e -o pipefail
@@ -16,6 +17,7 @@ for branch_name in "${ALL_BRANCHES[@]}"; do
     REMOTE_SHA=$(git ls-remote "${source_repo}" ${branch_name} | head -n1 | cut -f1)
     if (($? != 0)) || [[ "${REMOTE_SHA// /}" == "" ]]; then
         # error while getting remote status, log error and skip this branch
+        ERRORS=$((ERRORS + 1))
         >&2 echo "Could not get remote status for branch '${branch_name}', skipping branch."
         continue
     fi
@@ -33,8 +35,13 @@ done
 # from now on do not tolerate any errors, enable fail fast
 set -eo pipefail
 
-# bail out with failure if list is empty
-((${#BRANCHES[@]} > 0))
+# bail out with failure if all branches failed
+if ((${#ALL_BRANCHES[@]} - ERRORS <= 0)); then
+    echo "All remote branches failed."
+fi
+
+# bail out without failure if list is empty
+((${#BRANCHES[@]} > 0)) || exit 0
 
 # clone (use first branch in cloning)
 rm gh_repo -rf
