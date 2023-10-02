@@ -42,3 +42,12 @@ jobs:
         github_repo: PripyatMissionFiles.git
         branch: main
         access_token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: DayZCommunityOfflineMode
+      if: ${{ always() }}
+      run: ./mirror.sh
+      env:
+        source_repo: https://github.com/Arkensor/DayZCommunityOfflineMode.git
+        github_repo: DayZCommunityOfflineMode.git
+        branch: production, development
+        access_token: ${{ secrets.ACCESS_TOKEN }}
