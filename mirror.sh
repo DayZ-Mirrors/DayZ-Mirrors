@@ -13,12 +13,12 @@ set +e -o pipefail
 for branch_name in "${ALL_BRANCHES[@]}"; do
     # fetch commit-checksums
     LOCAL_SHA=$(git ls-remote "${GITHUB_REPO_URL}" ${branch_name} | cut -f1)
-    if (($? != 0)); then
+    REMOTE_SHA=$(git ls-remote "${source_repo}" ${branch_name} | head -n1 | cut -f1)
+    if (($? != 0)) || [[ "${REMOTE_SHA// /}" == "" ]]; then
         # error while getting remote status, log error and skip this branch
         >&2 echo "Could not get remote status for branch '${branch_name}', skipping branch."
         continue
     fi
-    REMOTE_SHA=$(git ls-remote "${source_repo}" ${branch_name} | head -n1 | cut -f1)
 
     echo "Local sha: ${LOCAL_SHA} (${github_repo})"
     echo "Remote sha: ${REMOTE_SHA} (${source_repo})"
