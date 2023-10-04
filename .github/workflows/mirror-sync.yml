@@ -51,3 +51,12 @@ jobs:
         github_repo: DayZCommunityOfflineMode.git
         branch: production, development
         access_token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: BearIsland-Mission-files
+      if: ${{ always() }}
+      run: ./mirror.sh
+      env:
+        source_repo: https://github.com/gotthardsen/BearIsland-Mission-files.git
+        github_repo: BearIsland-Mission-files.git
+        branch: main
+        access_token: ${{ secrets.ACCESS_TOKEN }}
