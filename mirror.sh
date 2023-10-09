@@ -51,7 +51,7 @@ cd gh_repo
 # pull and push all branches
 for branch_name in "${BRANCHES[@]}"; do
     echo "Updating branch '${branch_name}'"
-    git checkout -b "${branch_name}"
+    git checkout -B "${branch_name}"
     git pull "${source_repo}" "${branch_name}" || exit 1
     git push origin "${branch_name}" || exit 1
 done
