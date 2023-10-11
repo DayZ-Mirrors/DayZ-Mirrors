@@ -69,3 +69,12 @@ jobs:
         github_repo: DayZ-MapLink.git
         branch: main
         access_token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: Namalsk-Server
+      if: ${{ always() }}
+      run: ./mirror.sh
+      env:
+        source_repo: https://github.com/SumrakDZN/Namalsk-Server.git
+        github_repo: Namalsk-Server.git
+        branch: main
+        access_token: ${{ secrets.ACCESS_TOKEN }}
