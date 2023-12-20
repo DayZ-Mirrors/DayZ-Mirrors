@@ -22,8 +22,8 @@ for branch_name in "${ALL_BRANCHES[@]}"; do
         continue
     fi
 
-    echo "Local sha: ${LOCAL_SHA} (${github_repo})"
-    echo "Remote sha: ${REMOTE_SHA} (${source_repo})"
+    echo "Local sha: ${LOCAL_SHA} (${branch_name} @ ${github_repo})"
+    echo "Remote sha: ${REMOTE_SHA} (${branch_name} @ ${source_repo})"
 
     # add to list if commits are not equal
     if [[ "${LOCAL_SHA}" != "${REMOTE_SHA}" ]]; then
@@ -52,6 +52,6 @@ cd gh_repo
 for branch_name in "${BRANCHES[@]}"; do
     echo "Updating branch '${branch_name}'"
     git checkout -B "${branch_name}"
-    git pull "${source_repo}" "${branch_name}" || exit 1
+    git pull --ff-only "${source_repo}" "${branch_name}" || exit 1
     git push origin "${branch_name}" || exit 1
 done
