@@ -1,5 +1,8 @@
 name: mirror-sync
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron:  '12 3 * * *'
